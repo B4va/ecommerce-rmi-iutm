@@ -1,0 +1,37 @@
+version: "3"
+services:
+  db-banque:
+    container_name: db-banque
+    image: postgres:13
+    volumes:
+      - ./database/init-banque.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5400:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: db
+  db-magasin:
+    container_name: db-magasin
+    image: postgres:13
+    volumes:
+      - ./database/init-magasin.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5500:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: db
+  banque:
+    container_name: banque
+    build: banque/
+    ports:
+      - "8070:8080"
+  magasin:
+    container_name: magasin
+    build: magasin/
+    ports:
+      - "8080:8080"
+  client:
+    container_name: client
+    build: client/
