@@ -20,7 +20,7 @@ $ docker-compose up --build -d
 $ docker-compose up
 ```
 
-- Supprimer les conteneurs intallés :
+- Supprimer les conteneurs installés :
 
 ```
 $ docker container rm client magasin banque db-magasin db-banque
