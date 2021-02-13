@@ -26,7 +26,7 @@ services:
     container_name: banque
     build: banque/
     ports:
-      - "8070:8080"
+      - "8070:8070"
   magasin:
     container_name: magasin
     build: magasin/
