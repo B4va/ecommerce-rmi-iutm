@@ -10,8 +10,8 @@ import javax.persistence.*;
  * Client du magasin.
  */
 @Entity
-@Table(name = "article_commande")
-public class ArticleCommande extends Modele {
+@Table(name = "article_panier")
+public class ArticlePanier extends Modele {
 
   @Id
   @Generated(GenerationTime.INSERT)
@@ -25,15 +25,15 @@ public class ArticleCommande extends Modele {
   private Article article;
 
   @ManyToOne
-  @JoinColumn(name = "commande_id", nullable = false)
-  private Commande commande;
+  @JoinColumn(name = "panier_id", nullable = false)
+  private Panier panier;
 
-  public ArticleCommande() {
+  public ArticlePanier() {
   }
 
-  public ArticleCommande(Article article, Commande commande) {
+  public ArticlePanier(Article article, Panier panier) {
     this.article = article;
-    this.commande = commande;
+    this.panier = panier;
   }
 
   @Override
@@ -53,11 +53,11 @@ public class ArticleCommande extends Modele {
     this.article = article;
   }
 
-  public Commande getCommande() {
-    return commande;
+  public Panier getPanier() {
+    return panier;
   }
 
-  public void setCommande(Commande commande) {
-    this.commande = commande;
+  public void setPanier(Panier panier) {
+    this.panier = panier;
   }
 }

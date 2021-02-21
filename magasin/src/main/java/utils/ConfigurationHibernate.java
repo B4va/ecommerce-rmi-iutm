@@ -1,5 +1,6 @@
 package utils;
 
+import modeles.*;
 import org.hibernate.cfg.Configuration;
 
 /**
@@ -8,7 +9,7 @@ import org.hibernate.cfg.Configuration;
  */
 public class ConfigurationHibernate {
 
-  public static final String URL = "jdbc:postgresql://localhost:5400/db";
+  public static final String URL = "jdbc:postgresql://localhost:5500/db";
   public static final String USER = "user";
   public static final String PASSWORD = "pass";
 
@@ -31,7 +32,13 @@ public class ConfigurationHibernate {
    * Référence les modèles mappés par Hibernate.
    */
   private static void registerEntities(Configuration configuration) {
-
+    configuration.addAnnotatedClass(Article.class);
+    configuration.addAnnotatedClass(Commande.class);
+    configuration.addAnnotatedClass(ArticleCommande.class);
+    configuration.addAnnotatedClass(Boutique.class);
+    configuration.addAnnotatedClass(Client.class);
+    configuration.addAnnotatedClass(Panier.class);
+    configuration.addAnnotatedClass(ArticlePanier.class);
   }
 
   private static void setDatabaseConfiguration(Configuration configuration) {

@@ -31,7 +31,7 @@ public class Commande extends Modele {
   @Column(name = "livree", nullable = false)
   private boolean livree;
 
-  @OneToMany(mappedBy = "article_commande")
+  @OneToMany(mappedBy = "commande")
   private Set<ArticleCommande> articlesCommande;
 
   @ManyToOne

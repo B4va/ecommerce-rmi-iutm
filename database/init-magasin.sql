@@ -32,9 +32,25 @@ CREATE TABLE commande (
 );
 
 CREATE TABLE article_commande (
+    id SERIAL PRIMARY KEY,
     commande_id INT,
     article_id INT,
     quantite INT,
     CONSTRAINT fk_commande FOREIGN KEY (commande_id) REFERENCES commande(id),
     CONSTRAINT fk_article FOREIGN KEY (article_id) REFERENCES article(id)
+);
+
+CREATE TABLE panier (
+    id SERIAL PRIMARY KEY,
+    client_id INT,
+    CONSTRAINT fk_client_panier FOREIGN KEY (client_id) REFERENCES client(id)
+);
+
+CREATE TABLE article_panier (
+    id SERIAL PRIMARY KEY,
+    panier_id INT,
+    article_id INT,
+    quantite INT,
+    CONSTRAINT fk_panier FOREIGN KEY (panier_id) REFERENCES panier(id),
+    CONSTRAINT fk_article_panier FOREIGN KEY (article_id) REFERENCES article(id)
 );

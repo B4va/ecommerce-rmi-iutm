@@ -1,5 +1,6 @@
 package utils;
 
+import modeles.CompteBancaire;
 import org.hibernate.cfg.Configuration;
 
 /**
@@ -31,7 +32,7 @@ public class ConfigurationHibernate {
    * Référence les modèles mappés par Hibernate.
    */
   private static void registerEntities(Configuration configuration) {
-
+    configuration.addAnnotatedClass(CompteBancaire.class);
   }
 
   private static void setDatabaseConfiguration(Configuration configuration) {

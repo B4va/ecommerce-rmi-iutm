@@ -11,7 +11,7 @@ import java.util.Set;
  * Client du magasin.
  */
 @Entity
-@Table(name = "client")
+@Table(name = "panier")
 public class Panier extends Modele {
 
   @Id
@@ -25,15 +25,15 @@ public class Panier extends Modele {
   @JoinColumn(name = "client_id", nullable = false)
   private Client client;
 
-  @OneToMany(mappedBy = "article")
-  private Set<Article> articles;
+  @OneToMany(mappedBy = "panier")
+  private Set<ArticlePanier> articlePaniers;
 
   public Panier() {
   }
 
-  public Panier(Client client, Set<Article> articles) {
+  public Panier(Client client, Set<ArticlePanier> articlePaniers) {
     this.client = client;
-    this.articles = articles;
+    this.articlePaniers = articlePaniers;
   }
 
   @Override
@@ -53,11 +53,11 @@ public class Panier extends Modele {
     this.client = client;
   }
 
-  public Set<Article> getArticles() {
-    return articles;
+  public Set<ArticlePanier> getArticlePaniers() {
+    return articlePaniers;
   }
 
-  public void setArticles(Set<Article> articles) {
-    this.articles = articles;
+  public void setArticlePaniers(Set<ArticlePanier> articlePaniers) {
+    this.articlePaniers = articlePaniers;
   }
 }
