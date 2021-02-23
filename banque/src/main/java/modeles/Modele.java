@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Méthodes d'accès aux données propres aux différents modèles.
  */
-public abstract class Modele {
+public abstract class Modele implements Serializable {
 
   public abstract int getId();
 
