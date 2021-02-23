@@ -8,6 +8,8 @@
 
 ## Exécution
 
+### Initialisation des bases de données
+
 - Première exécution :
 
 ```
@@ -23,7 +25,7 @@ $ docker-compose up
 - Supprimer les conteneurs installés :
 
 ```
-$ docker container rm client magasin banque db-magasin db-banque
+$ docker container rm db-magasin db-banque
 ```
 
 - Supprimer les images installées :
@@ -31,6 +33,12 @@ $ docker container rm client magasin banque db-magasin db-banque
 ```
 $ docker image rm ecommerce-rmi-iutm_client ecommerce-rmi-iutm_magasin ecommerce-rmi-iutm_banque
 ```
+
+### Démarrage des programmes
+
+1. Lancer l'application Banque via la classe exécutable `app.App`, dans `\banque`.
+2. Lancer l'application Magasin via la classe exécutable `app.App`, dans `\magasin`.
+3. Lancer l'application GUI via la classe exécutable `app.App`, dans `\client`.
 
 ## Conception
 

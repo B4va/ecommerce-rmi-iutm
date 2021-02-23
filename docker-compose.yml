@@ -22,16 +22,3 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: pass
       POSTGRES_DB: db
-  banque:
-    container_name: banque
-    build: banque/
-    ports:
-      - "8070:8070"
-  magasin:
-    container_name: magasin
-    build: magasin/
-    ports:
-      - "8080:8080"
-  client:
-    container_name: client
-    build: client/
