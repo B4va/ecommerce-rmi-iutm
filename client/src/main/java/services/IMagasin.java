@@ -9,4 +9,6 @@ import java.rmi.RemoteException;
 public interface IMagasin extends Remote {
 
   String test() throws RemoteException;
+
+  int validerUtilisateur(String email, String motDePasse) throws RemoteException;
 }

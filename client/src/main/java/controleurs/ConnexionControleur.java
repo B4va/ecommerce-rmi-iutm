@@ -1,12 +1,20 @@
 package controleurs;
 
 import app.App;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import modeles.Session;
 import services.IMagasin;
 
 import java.net.MalformedURLException;
@@ -23,25 +31,60 @@ public class ConnexionControleur extends Controleur {
     super(primaryStage);
   }
 
+  private Text connexion;
+  private TextField email;
+  private PasswordField motDePasse;
+  private Button valider;
+  private Text notification;
+  private VBox layout;
+
   @Override
-  public Scene getScene() {
-    Text label = new Text("Connexion");
-    Text testRMI = new Text(testRMI());
-    Button button = new Button("Magasins");
-    button.setOnAction(e -> primaryStage.setScene(new ListeMagasinsControleur(primaryStage).getScene()));
-    VBox layout = new VBox(20);
-    layout.getChildren().addAll(label, button, testRMI);
+  protected void init() {
+    connexion = new Text("Connexion");
+    connexion.setFont(Font.font(20));
+    email = new TextField();
+    email.setPromptText("email");
+    motDePasse = new PasswordField();
+    motDePasse.setPromptText("mot de passe");
+    valider = new Button("Connexion");
+    notification = new Text();
+    layout = new VBox(20);
+    layout.getChildren().addAll(connexion, email, motDePasse, valider, notification);
     layout.setAlignment(Pos.CENTER);
-    return new Scene(layout, 300, 250);
+    layout.setPadding(new Insets(20, 40, 20, 40));
+    scene = new Scene(layout, 400, 350);
   }
 
-  private String testRMI() {
+  @Override
+  protected void gererElements() {
+    valider.setOnAction(this::gererConnexion);
+    scene.setOnKeyPressed(e -> {
+      if (e.getCode().equals(KeyCode.ENTER)) gererConnexion(e);
+    });
+  }
+
+  private void gererConnexion(Event e) {
     try {
-      IMagasin serviceMagasin = (IMagasin) Naming.lookup(App.URL_API_MAGASIN);
-      return serviceMagasin.test();
-    } catch (NotBoundException | MalformedURLException | RemoteException e) {
-      e.printStackTrace();
-      return "Erreur";
+      boolean identifiantsValides = controlerIdentifiants(email.getText(), motDePasse.getText());
+      if (identifiantsValides) {
+        primaryStage.setScene(new ListeMagasinsControleur(primaryStage).getScene());
+      } else {
+        notification.setText("Identifiants invalides");
+      }
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      notification.setText("Erreur serveur");
     }
+  }
+
+  private boolean controlerIdentifiants(String email, String motDePasse) throws RemoteException, NotBoundException, MalformedURLException {
+      IMagasin serviceMagasin = (IMagasin) Naming.lookup(App.URL_API_MAGASIN);
+      int userId = serviceMagasin.validerUtilisateur(email, motDePasse);
+      if (userId == -1) {
+        return false;
+      } else {
+        Session.getInstance().setUserId(userId);
+        return true;
+      }
   }
 }

@@ -1,10 +1,9 @@
 package controleurs;
 
-import javafx.geometry.Pos;
+import elements.MenuElement;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -12,18 +11,22 @@ import javafx.stage.Stage;
  */
 public class ListeMagasinsControleur extends Controleur {
 
+  private VBox layout;
+  private HBox menu;
+
   public ListeMagasinsControleur(Stage primaryStage) {
     super(primaryStage);
   }
 
   @Override
-  public Scene getScene() {
-    Text label = new Text("Magasins");
-    VBox layout = new VBox(20);
-    Button button = new Button("Retour page de connexion");
-    button.setOnAction(e -> primaryStage.setScene(new ConnexionControleur(primaryStage).getScene()));
-    layout.getChildren().addAll(label, button);
-    layout.setAlignment(Pos.CENTER);
-    return new Scene(layout, 300, 250);
+  protected void init() {
+    layout = new VBox(20);
+    menu = new MenuElement(primaryStage).getElement();
+    layout.getChildren().addAll(menu);
+    scene = new Scene(layout, 1000, 800);
+  }
+
+  @Override
+  protected void gererElements() {
   }
 }

@@ -1,12 +1,15 @@
 package services;
 
 import app.App;
+import modeles.Client;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+
+import static java.util.Objects.isNull;
 
 /**
  * Implémentation des services fournis par l'application magasin via protocole RMI.
@@ -17,13 +20,11 @@ public class ServiceMagasin extends UnicastRemoteObject implements IMagasin {
     super();
   }
 
-  public String test() throws RemoteException {
-    try {
-      IBanque serviceBanque = (IBanque) Naming.lookup(App.URL_API_BANQUE);
-      return serviceBanque.test();
-    } catch (NotBoundException | MalformedURLException | RemoteException e) {
-      e.printStackTrace();
-      return "Erreur";
-    }
+
+  @Override
+  public int validerUtilisateur(String email, String motDePasse) throws RemoteException {
+    Client client = Client.chargerAvecEmail(email);
+    if (isNull(client)) return -1;
+    return client.getMotDePasse().equals(motDePasse) ? client.getId() : -1;
   }
 }
