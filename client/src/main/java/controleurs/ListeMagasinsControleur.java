@@ -29,4 +29,8 @@ public class ListeMagasinsControleur extends Controleur {
   @Override
   protected void gererElements() {
   }
+
+  @Override
+  protected void nettoyerContexte() {
+  }
 }

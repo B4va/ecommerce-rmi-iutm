@@ -29,4 +29,8 @@ public class ListeArticlesControleur extends Controleur {
   @Override
   protected void gererElements() {
   }
+
+  @Override
+  protected void nettoyerContexte() {
+  }
 }

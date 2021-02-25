@@ -47,19 +47,6 @@ public class Client extends Modele {
     this.motDePasse = motDePasse;
   }
 
-  public static Client chargerAvecEmail(String email) {
-    Session session = BaseDeDonneesUtils.getSessionFactory().openSession();
-    CriteriaBuilder builder = session.getCriteriaBuilder();
-    CriteriaQuery<Client> criteria = builder.createQuery(Client.class);
-    Root<Client> root = criteria.from(Client.class);
-    criteria.from(Client.class);
-    criteria.select(root).where(builder.equal(root.get("mail"), email));
-    return session.createQuery(criteria).getResultList()
-      .stream()
-      .findFirst()
-      .orElse(null);
-  }
-
   @Override
   public int getId() {
     return id;

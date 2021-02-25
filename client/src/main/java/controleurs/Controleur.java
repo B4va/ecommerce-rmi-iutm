@@ -18,10 +18,13 @@ public abstract class Controleur {
   public Scene getScene() {
     init();
     gererElements();
+    nettoyerContexte();
     return scene;
   }
 
   protected abstract void init();
 
   protected abstract void gererElements();
+  
+  protected abstract void nettoyerContexte();
 }

@@ -63,6 +63,10 @@ public class ConnexionControleur extends Controleur {
     });
   }
 
+  @Override
+  protected void nettoyerContexte() {
+  }
+
   private void gererConnexion(Event e) {
     try {
       boolean identifiantsValides = controlerIdentifiants(email.getText(), motDePasse.getText());

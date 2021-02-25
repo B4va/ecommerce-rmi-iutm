@@ -1,28 +1,28 @@
 package controleurs;
 
 import elements.MenuElement;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import modeles.Session;
 
-/**
- * Controleur de la vue "panier".
- */
-public class PanierControleur extends Controleur {
+public class ErreurControleur extends Controleur {
 
   private VBox layout;
-  private HBox menu;
+  private Text erreur;
 
-  public PanierControleur(Stage primaryStage) {
+  public ErreurControleur(Stage primaryStage) {
     super(primaryStage);
   }
 
   @Override
   protected void init() {
     layout = new VBox(20);
-    menu = new MenuElement(primaryStage).getElement();
-    layout.getChildren().addAll(menu);
+    layout.setAlignment(Pos.CENTER);
+    erreur = new Text(Session.getInstance().getErreur());
+    layout.getChildren().addAll(erreur);
     scene = new Scene(layout, 1000, 800);
   }
 
@@ -32,5 +32,6 @@ public class PanierControleur extends Controleur {
 
   @Override
   protected void nettoyerContexte() {
+    Session.getInstance().setErreur(null);
   }
 }
