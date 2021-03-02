@@ -28,6 +28,9 @@ public class ArticlePanier extends Modele {
   @JoinColumn(name = "panier_id", nullable = false)
   private Panier panier;
 
+  @Column(name = "quantite", nullable = false)
+  private int qte;
+
   public ArticlePanier() {
   }
 
@@ -59,5 +62,13 @@ public class ArticlePanier extends Modele {
 
   public void setPanier(Panier panier) {
     this.panier = panier;
+  }
+
+  public int getQte() {
+    return qte;
+  }
+
+  public void setQte(int qte) {
+    this.qte = qte;
   }
 }

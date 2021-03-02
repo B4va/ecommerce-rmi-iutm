@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Set;
 
 /**
- * Data Transfert Object - {@link modeles.Commande}.
+ * Data Transfert Object - Commande.
  */
 public class CommandeDTO implements Serializable {
 

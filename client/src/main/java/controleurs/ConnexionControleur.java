@@ -1,7 +1,6 @@
 package controleurs;
 
 import app.App;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

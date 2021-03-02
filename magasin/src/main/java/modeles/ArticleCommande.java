@@ -28,6 +28,9 @@ public class ArticleCommande extends Modele {
   @JoinColumn(name = "commande_id", nullable = false)
   private Commande commande;
 
+  @Column(name = "quantite", nullable = false)
+  private int qte;
+
   public ArticleCommande() {
   }
 
@@ -59,5 +62,13 @@ public class ArticleCommande extends Modele {
 
   public void setCommande(Commande commande) {
     this.commande = commande;
+  }
+
+  public int getQte() {
+    return qte;
+  }
+
+  public void setQte(int qte) {
+    this.qte = qte;
   }
 }

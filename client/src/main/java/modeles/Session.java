@@ -11,6 +11,7 @@ import java.util.Objects;
 public class Session {
 
   public static final String COMMANDE_CTX = "COMMANDE";
+  public static final String ARTICLE_CTX = "ARTICLE";
 
   private static Session SESSION;
 

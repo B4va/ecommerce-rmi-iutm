@@ -24,7 +24,7 @@ public class Article extends Modele {
   private String libelle;
 
   @Column(name = "prix", nullable = false)
-  private double article;
+  private double prix;
 
   @Column(name = "description")
   private String description;
@@ -42,9 +42,9 @@ public class Article extends Modele {
   public Article() {
   }
 
-  public Article(String libelle, double article, String description, int stock, byte[] imageBlob, Boutique boutique) {
+  public Article(String libelle, double prix, String description, int stock, byte[] imageBlob, Boutique boutique) {
     this.libelle = libelle;
-    this.article = article;
+    this.prix = prix;
     this.description = description;
     this.stock = stock;
     this.imageBlob = imageBlob;
@@ -68,12 +68,12 @@ public class Article extends Modele {
     this.libelle = libelle;
   }
 
-  public double getArticle() {
-    return article;
+  public double getPrix() {
+    return prix;
   }
 
-  public void setArticle(double article) {
-    this.article = article;
+  public void setPrix(double prix) {
+    this.prix = prix;
   }
 
   public String getDescription() {

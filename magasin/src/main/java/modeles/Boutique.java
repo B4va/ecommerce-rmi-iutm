@@ -24,7 +24,7 @@ public class Boutique extends Modele {
   @Column(name = "nom", nullable = false)
   private String nom;
 
-  @OneToMany(mappedBy = "article")
+  @OneToMany(mappedBy = "boutique")
   private Set<Article> articles;
 
   public Boutique() {

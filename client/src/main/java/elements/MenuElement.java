@@ -2,6 +2,7 @@ package elements;
 
 import controleurs.ConnexionControleur;
 import controleurs.ListeCommandesControleur;
+import controleurs.PanierControleur;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -14,6 +15,7 @@ public class MenuElement extends Element<HBox> {
   private Stage primaryStage;
   private HBox menu;
   private Button deconnexion;
+  private Button panier;
   private Button commandes;
 
   public MenuElement(Stage primaryStage) {
@@ -23,18 +25,24 @@ public class MenuElement extends Element<HBox> {
   public HBox getElement() {
     deconnexion = new Button("Déconnexion");
     deconnexion.setOnAction(this::gererDeconnexion);
+    panier = new Button("Panier");
+    panier.setOnAction(this::gererPanier);
     commandes = new Button("Commandes");
     commandes.setOnAction(this::gererCommandes);
     menu = new HBox(20);
     menu.setPadding(new Insets(10));
     menu.setStyle("-fx-border-color : black; -fx-border-width : 0 0 1 0");
-    menu.getChildren().addAll(deconnexion, commandes);
+    menu.getChildren().addAll(deconnexion, panier, commandes);
     return menu;
   }
 
   private void gererDeconnexion(ActionEvent e) {
     Session.init();
     primaryStage.setScene(new ConnexionControleur(primaryStage).getScene());
+  }
+
+  private void gererPanier(ActionEvent e) {
+    primaryStage.setScene(new PanierControleur(primaryStage).getScene());
   }
 
   private void gererCommandes(ActionEvent e) {
