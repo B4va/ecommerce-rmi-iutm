@@ -1,6 +1,7 @@
 package services;
 
 import dtos.ArticlePanierDTO;
+import dtos.BoutiqueDTO;
 import dtos.CommandeDTO;
 import modeles.*;
 
@@ -87,5 +88,13 @@ public class ServiceMagasin extends UnicastRemoteObject implements IMagasin {
       ap.setQte(qte);
       ap.mettreAjour();
     }
+  }
+
+  @Override
+  public List<BoutiqueDTO> recupererListeMagasins() throws RemoteException {
+    return Boutique.chargerTous(Boutique.class)
+      .stream()
+      .map(b -> new BoutiqueDTO(b.getId(), b.getNom()))
+      .collect(Collectors.toList());
   }
 }

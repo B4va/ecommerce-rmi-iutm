@@ -36,6 +36,7 @@ public class ListeCommandesControleur extends Controleur {
   private List<Text> livrees = new ArrayList<>();
   private List<Text> dates = new ArrayList<>();
   private List<Button> boutonsCommandes = new ArrayList<>();
+  private Text aucuneCommande;
 
   public ListeCommandesControleur(Stage primaryStage) {
     super(primaryStage);
@@ -45,31 +46,39 @@ public class ListeCommandesControleur extends Controleur {
   protected void init() {
     layout = new VBox(20);
     menu = new MenuElement(primaryStage).getElement();
-    initialiserCommandes();
     commandesBox = new VBox(20);
-    commandesBox.setPadding(new Insets(50));
-    commandesBox.getChildren().addAll(commandes);
+    if (initialiserCommandes()) {
+      commandesBox.setPadding(new Insets(50));
+      commandesBox.getChildren().addAll(commandes);
+    } else {
+      commandesBox.setPadding(new Insets(0, 0, 0, 20));
+      aucuneCommande = new Text("Aucune commande en cours");
+      commandesBox.getChildren().add(aucuneCommande);
+    }
     layout.getChildren().addAll(menu, commandesBox);
     scene = new Scene(layout, 1000, 800);
   }
 
   @Override
   protected void gererElements() {
-    boutonsCommandes.forEach(b -> b.setOnAction(this::gererBoutonCommande));
+    if (!boutonsCommandes.isEmpty()) boutonsCommandes.forEach(b -> b.setOnAction(this::gererBoutonCommande));
   }
 
   @Override
   protected void nettoyerContexte() {
   }
 
-  private void initialiserCommandes() {
+  private boolean initialiserCommandes() {
     try {
       IMagasin serviceMagasin = (IMagasin) Naming.lookup(App.URL_API_MAGASIN);
       List<CommandeDTO> commandes = serviceMagasin.recupererListeCommande(Session.getInstance().getUserId());
+      if (commandes.isEmpty()) return false;
       formaterCommandes(commandes);
+      return true;
     } catch (Exception ex) {
       ex.printStackTrace();
       Session.getInstance().setErreur("Erreur serveur");
+      return false;
     }
   }
 

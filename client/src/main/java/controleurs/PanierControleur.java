@@ -56,8 +56,8 @@ public class PanierControleur extends Controleur {
     menu = new MenuElement(primaryStage).getElement();
     layout.getChildren().add(menu);
     articlesBox = new VBox(20);
-    articlesBox.setPadding(new Insets(20));
     if (initialiserPanier()) {
+      articlesBox.setPadding(new Insets(20));
       articlesBox.getChildren().addAll(articles);
       total = new Text(calculerTotal());
       total.setFont(Font.font(20));
@@ -69,6 +69,7 @@ public class PanierControleur extends Controleur {
       buttons.setAlignment(Pos.CENTER);
       layout.getChildren().addAll(articlesBox, buttons);
     } else {
+      articlesBox.setPadding(new Insets(0, 0, 0, 20));
       aucunArticle = new Text("Aucun article dans le panier");
       articlesBox.getChildren().add(aucunArticle);
       layout.getChildren().add(articlesBox);

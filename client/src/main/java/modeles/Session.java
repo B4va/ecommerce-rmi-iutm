@@ -12,6 +12,7 @@ public class Session {
 
   public static final String COMMANDE_CTX = "COMMANDE";
   public static final String ARTICLE_CTX = "ARTICLE";
+  public static final String MAGASIN_CTX = "MAGASIN";
 
   private static Session SESSION;
 
