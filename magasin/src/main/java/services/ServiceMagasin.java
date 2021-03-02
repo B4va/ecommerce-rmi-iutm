@@ -1,5 +1,6 @@
 package services;
 
+import dtos.ArticleMagasinDTO;
 import dtos.ArticlePanierDTO;
 import dtos.BoutiqueDTO;
 import dtos.CommandeDTO;
@@ -95,6 +96,15 @@ public class ServiceMagasin extends UnicastRemoteObject implements IMagasin {
     return Boutique.chargerTous(Boutique.class)
       .stream()
       .map(b -> new BoutiqueDTO(b.getId(), b.getNom()))
+      .collect(Collectors.toList());
+  }
+
+  @Override
+  public List<ArticleMagasinDTO> recupererArticlesMagasin(int idMagasin) throws RemoteException {
+    return Article.chargerTous(Article.class)
+      .stream()
+      .filter(a -> a.getBoutique().getId() == idMagasin)
+      .map(a -> new ArticleMagasinDTO(a.getId(), a.getLibelle(), Math.round(a.getPrix() * 100) / 100.0, a.getStock() > 0))
       .collect(Collectors.toList());
   }
 }

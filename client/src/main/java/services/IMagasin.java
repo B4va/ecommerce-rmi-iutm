@@ -1,5 +1,6 @@
 package services;
 
+import dtos.ArticleMagasinDTO;
 import dtos.ArticlePanierDTO;
 import dtos.BoutiqueDTO;
 import dtos.CommandeDTO;
@@ -26,4 +27,6 @@ public interface IMagasin extends Remote {
   void modifierQunatiteArticlePanier(int idArticlePanier, int qte) throws RemoteException;
 
   List<BoutiqueDTO> recupererListeMagasins() throws RemoteException;
+
+  List<ArticleMagasinDTO> recupererArticlesMagasin(int idMagasin);
 }

@@ -63,7 +63,8 @@ public class ListeMagasinsControleur extends Controleur {
       formaterMagasins(magasins);
     } catch (Exception ex) {
       ex.printStackTrace();
-      Session.getInstance().setErreur("Erreur serveur");
+      Session.getInstance().setErreur("Erreur");
+      primaryStage.setScene(new ErreurControleur(primaryStage).getScene());
     }
   }
 

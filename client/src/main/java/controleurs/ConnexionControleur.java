@@ -76,7 +76,7 @@ public class ConnexionControleur extends Controleur {
       }
     } catch (Exception ex) {
       ex.printStackTrace();
-      notification.setText("Erreur serveur");
+      notification.setText("Erreur");
     }
   }
 

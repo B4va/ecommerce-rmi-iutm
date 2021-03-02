@@ -77,7 +77,8 @@ public class ListeCommandesControleur extends Controleur {
       return true;
     } catch (Exception ex) {
       ex.printStackTrace();
-      Session.getInstance().setErreur("Erreur serveur");
+      Session.getInstance().setErreur("Erreur");
+      primaryStage.setScene(new ErreurControleur(primaryStage).getScene());
       return false;
     }
   }

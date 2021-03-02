@@ -90,7 +90,8 @@ public class PanierControleur extends Controleur {
       return true;
     } catch (Exception ex) {
       ex.printStackTrace();
-      Session.getInstance().setErreur("Erreur serveur");
+      Session.getInstance().setErreur("Erreur");
+      primaryStage.setScene(new ErreurControleur(primaryStage).getScene());
       return false;
     }
   }
@@ -146,7 +147,8 @@ public class PanierControleur extends Controleur {
       serviceMagasin.supprimerArticlePanier((int) ((Button) e.getSource()).getUserData());
     } catch (Exception ex) {
       ex.printStackTrace();
-      Session.getInstance().setErreur("Erreur serveur");
+      Session.getInstance().setErreur("Erreur");
+      primaryStage.setScene(new ErreurControleur(primaryStage).getScene());
     }
     primaryStage.setScene(new PanierControleur(primaryStage).getScene());
   }
@@ -159,7 +161,8 @@ public class PanierControleur extends Controleur {
       }
     } catch (Exception ex) {
       ex.printStackTrace();
-      Session.getInstance().setErreur("Erreur serveur");
+      Session.getInstance().setErreur("Erreur");
+      primaryStage.setScene(new ErreurControleur(primaryStage).getScene());
     }
     primaryStage.setScene(new PanierControleur(primaryStage).getScene());
   }
@@ -170,7 +173,8 @@ public class PanierControleur extends Controleur {
       serviceMagasin.viderPanierClient(Session.getInstance().getUserId());
     } catch (Exception ex) {
       ex.printStackTrace();
-      Session.getInstance().setErreur("Erreur serveur");
+      Session.getInstance().setErreur("Erreur");
+      primaryStage.setScene(new ErreurControleur(primaryStage).getScene());
     }
     primaryStage.setScene(new PanierControleur(primaryStage).getScene());
   }
