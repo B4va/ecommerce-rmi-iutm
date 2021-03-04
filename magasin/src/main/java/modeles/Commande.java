@@ -41,11 +41,10 @@ public class Commande extends Modele {
   public Commande() {
   }
 
-  public Commande(String adresse, Date date, boolean livree, Set<ArticleCommande> articlesCommande, Client client) {
+  public Commande(String adresse, Date date, Client client) {
     this.adresse = adresse;
     this.date = date;
-    this.livree = livree;
-    this.articlesCommande = articlesCommande;
+    this.livree = false;
     this.client = client;
   }
 

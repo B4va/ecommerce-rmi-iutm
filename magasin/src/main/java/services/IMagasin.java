@@ -32,4 +32,6 @@ public interface IMagasin extends Remote {
   boolean isArticleDansPanier(int idArticle, int idUser) throws RemoteException;
 
   void ajouterAuPanier(int idArticle, int idUser) throws RemoteException;
+
+  String creerCommande(int userId, String refCompte, String adresse) throws RemoteException;
 }

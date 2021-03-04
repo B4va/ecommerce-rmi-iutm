@@ -90,8 +90,8 @@ public class ListeCommandesControleur extends Controleur {
       commande.setAlignment(Pos.CENTER);
       commande.setPadding(new Insets(20));
       this.commandes.add(commande);
-      Text date = new Text(new SimpleDateFormat("dd-MM-yyyy").format(c.getDate()));
-      date.setFont(Font.font(20));
+      Text date = new Text("Livraison prévue le : " + new SimpleDateFormat("dd-MM-yyyy").format(c.getDate()));
+      date.setFont(Font.font(16));
       dates.add(date);
       adresses.add(new Text(c.getAdresse()));
       livrees.add(new Text(c.isLivree() ? "Livrée" : "Non livrée"));

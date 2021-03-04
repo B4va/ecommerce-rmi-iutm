@@ -8,5 +8,5 @@ import java.rmi.RemoteException;
  */
 public interface IBanque extends Remote {
 
-  String test() throws RemoteException;
+  String payer(String refCompte, double montant) throws RemoteException;
 }
