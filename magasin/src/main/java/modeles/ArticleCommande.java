@@ -34,9 +34,10 @@ public class ArticleCommande extends Modele {
   public ArticleCommande() {
   }
 
-  public ArticleCommande(Article article, Commande commande) {
+  public ArticleCommande(Article article, Commande commande, int qte) {
     this.article = article;
     this.commande = commande;
+    this.qte = qte;
   }
 
   @Override

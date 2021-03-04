@@ -85,7 +85,7 @@ public class ListeCommandesControleur extends Controleur {
 
   private void formaterCommandes(List<CommandeDTO> commandes) {
     commandes.forEach(c -> {
-      HBox commande = new HBox(120);
+      HBox commande = new HBox(70);
       commande.setStyle("-fx-border-color : black; -fx-border-width : 1 1 1 1");
       commande.setAlignment(Pos.CENTER);
       commande.setPadding(new Insets(20));

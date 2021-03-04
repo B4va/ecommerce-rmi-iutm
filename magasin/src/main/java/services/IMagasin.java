@@ -34,4 +34,6 @@ public interface IMagasin extends Remote {
   void ajouterAuPanier(int idArticle, int idUser) throws RemoteException;
 
   String creerCommande(int userId, String refCompte, String adresse) throws RemoteException;
+
+  CommandeDetailsDTO recupererCommande(int idCommande) throws RemoteException;
 }

@@ -174,6 +174,21 @@ public class ServiceMagasin extends UnicastRemoteObject implements IMagasin {
     }
   }
 
+  @Override
+  public CommandeDetailsDTO recupererCommande(int idCommande) throws RemoteException {
+    Commande commande = Commande.charger(idCommande, Commande.class);
+    List<ArticleCommandeDTO> articles = commande.getArticlesCommande()
+      .stream()
+      .map(ac -> new ArticleCommandeDTO(ac.getArticle().getLibelle(), ac.getQte(), ac.getQte() * Math.round(ac.getArticle().getPrix() * 100) / 100.0))
+      .collect(Collectors.toList());
+    double prix = articles
+      .stream()
+      .map(ArticleCommandeDTO::getPrix)
+      .reduce(Double::sum)
+      .orElse(0.0);
+    return new CommandeDetailsDTO(commande.getDate(), prix, commande.isLivree(), articles);
+  }
+
   private void doCreerCommande(Panier panier, Client client, String adresse) throws RemoteException {
     Calendar calendar = Calendar.getInstance();
     calendar.add(Calendar.DAY_OF_MONTH, 3);
@@ -184,7 +199,7 @@ public class ServiceMagasin extends UnicastRemoteObject implements IMagasin {
         ap.getArticle().setStock(ap.getArticle().getStock() - ap.getQte());
         ap.mettreAjour();
       });
-    panier.getArticlePaniers().forEach(ap -> new ArticleCommande(ap.getArticle(), commande).creer());
+    panier.getArticlePaniers().forEach(ap -> new ArticleCommande(ap.getArticle(), commande, ap.getQte()).creer());
     viderPanierClient(client.getId());
   }
 
