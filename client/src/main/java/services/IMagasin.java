@@ -1,9 +1,6 @@
 package services;
 
-import dtos.ArticleMagasinDTO;
-import dtos.ArticlePanierDTO;
-import dtos.BoutiqueDTO;
-import dtos.CommandeDTO;
+import dtos.*;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -24,9 +21,15 @@ public interface IMagasin extends Remote {
 
   void viderPanierClient(int idClient) throws RemoteException;
 
-  void modifierQunatiteArticlePanier(int idArticlePanier, int qte) throws RemoteException;
+  void modifierQuantiteArticlePanier(int idArticlePanier, int qte) throws RemoteException;
 
   List<BoutiqueDTO> recupererListeMagasins() throws RemoteException;
 
-  List<ArticleMagasinDTO> recupererArticlesMagasin(int idMagasin);
+  List<ArticleMagasinDTO> recupererArticlesMagasin(int idMagasin) throws RemoteException;
+
+  ArticleDTO recupererArticle(int idArticle) throws RemoteException;
+
+  boolean isArticleDansPanier(int idArticle, int idUser) throws RemoteException;
+
+  void ajouterAuPanier(int idArticle, int idUser) throws RemoteException;
 }

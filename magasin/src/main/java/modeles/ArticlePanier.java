@@ -34,9 +34,10 @@ public class ArticlePanier extends Modele {
   public ArticlePanier() {
   }
 
-  public ArticlePanier(Article article, Panier panier) {
+  public ArticlePanier(Article article, Panier panier, int qte) {
     this.article = article;
     this.panier = panier;
+    this.qte = qte;
   }
 
   @Override

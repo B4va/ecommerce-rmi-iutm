@@ -157,7 +157,7 @@ public class PanierControleur extends Controleur {
     try {
       IMagasin serviceMagasin = (IMagasin) Naming.lookup(App.URL_API_MAGASIN);
       for (int i = 0 ; i < this.articles.size() ; i++) {
-        serviceMagasin.modifierQunatiteArticlePanier((int) majQuantite.get(i).getUserData(), Integer.parseInt(quantite.get(i).getText()));
+        serviceMagasin.modifierQuantiteArticlePanier((int) majQuantite.get(i).getUserData(), Integer.parseInt(quantite.get(i).getText()));
       }
     } catch (Exception ex) {
       ex.printStackTrace();

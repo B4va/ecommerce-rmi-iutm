@@ -2,6 +2,9 @@ package dtos;
 
 import java.io.Serializable;
 
+/**
+ * Data Transfert Object - Articles associés à un magasin.
+ */
 public class ArticleMagasinDTO implements Serializable {
 
   private int id;

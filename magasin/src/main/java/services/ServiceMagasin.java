@@ -1,13 +1,11 @@
 package services;
 
-import dtos.ArticleMagasinDTO;
-import dtos.ArticlePanierDTO;
-import dtos.BoutiqueDTO;
-import dtos.CommandeDTO;
+import dtos.*;
 import modeles.*;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,7 +58,7 @@ public class ServiceMagasin extends UnicastRemoteObject implements IMagasin {
         ap.getId(),
         ap.getArticle().getLibelle(),
         ap.getQte(),
-        ap.getQte() >= ap.getArticle().getStock(),
+        ap.getQte() <= ap.getArticle().getStock(),
         Math.round(ap.getQte() * ap.getArticle().getPrix() * 100) / 100.0))
       .collect(Collectors.toList());
   }
@@ -83,7 +81,7 @@ public class ServiceMagasin extends UnicastRemoteObject implements IMagasin {
   }
 
   @Override
-  public void modifierQunatiteArticlePanier(int idArticlePanier, int qte) throws RemoteException {
+  public void modifierQuantiteArticlePanier(int idArticlePanier, int qte) throws RemoteException {
     ArticlePanier ap = ArticlePanier.charger(idArticlePanier, ArticlePanier.class);
     if (nonNull(ap)) {
       ap.setQte(qte);
@@ -106,5 +104,46 @@ public class ServiceMagasin extends UnicastRemoteObject implements IMagasin {
       .filter(a -> a.getBoutique().getId() == idMagasin)
       .map(a -> new ArticleMagasinDTO(a.getId(), a.getLibelle(), Math.round(a.getPrix() * 100) / 100.0, a.getStock() > 0))
       .collect(Collectors.toList());
+  }
+
+  @Override
+  public ArticleDTO recupererArticle(int idArticle) throws RemoteException {
+    Article article = Article.charger(idArticle, Article.class);
+    if (isNull(article)) return null;
+    boolean dispo = article.getStock() > 0;
+    double prix = Math.round(article.getPrix() * 100) / 100.0;
+    return new ArticleDTO(article.getId(), article.getLibelle(), prix, article.getDescription(), dispo, article.getBoutique().getId());
+  }
+
+  @Override
+  public boolean isArticleDansPanier(int idArticle, int idUser) throws RemoteException {
+    Panier panier = Panier.chargerTous(Panier.class)
+      .stream()
+      .filter(p -> p.getClient().getId() == idUser)
+      .findFirst()
+      .orElse(null);
+    if (nonNull(panier)) {
+      return panier.getArticlePaniers()
+        .stream()
+        .anyMatch(ap -> ap.getArticle().getId() == idArticle);
+    } else {
+      return false;
+    }
+  }
+
+  @Override
+  public void ajouterAuPanier(int idArticle, int idUser) throws RemoteException {
+    Client client = Client.charger(idUser, Client.class);
+    Panier panier = Panier.chargerTous(Panier.class)
+      .stream()
+      .filter(p -> p.getClient().getId() == idUser)
+      .findFirst()
+      .orElse(new Panier(client, new HashSet<>()));
+    if (panier.getId() == 0) panier.setId(panier.creer());
+    Article article = Article.charger(idArticle, Article.class);
+    ArticlePanier articlePanier = new ArticlePanier(article, panier, 1);
+    articlePanier.setId(articlePanier.creer());
+    panier.getArticlePaniers().add(articlePanier);
+    panier.mettreAjour();
   }
 }

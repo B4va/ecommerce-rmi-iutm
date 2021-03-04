@@ -3,7 +3,7 @@ package dtos;
 import java.io.Serializable;
 
 /**
- * Data Transfert Object - ArticlePanier.
+ * Data Transfert Object - Article associé à un panier.
  */
 public class ArticlePanierDTO implements Serializable {
 
