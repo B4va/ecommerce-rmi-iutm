@@ -4,7 +4,7 @@ services:
     container_name: db-banque
     image: postgres:13
     volumes:
-      - ./database/init-banque.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./bdd/init-banque.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5400:5432"
     environment:
@@ -15,7 +15,7 @@ services:
     container_name: db-magasin
     image: postgres:13
     volumes:
-      - ./database/init-magasin.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./bdd/init-magasin.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5500:5432"
     environment:
